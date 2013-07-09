@@ -1,0 +1,448 @@
+(gdb) r defuser.txt
+Starting program: /home/auser/course-materials/lab2/bomb defuser.txt
+Welcome to my fiendish little bomb. You have 6 phases with
+which to blow yourself up. Have a nice day!
+Phase 1 defused. How about the next one?
+That's number 2.  Keep going!
+Halfway there!
+
+Breakpoint 9, 0x0000000000400fc1 in phase_4 ()
+(gdb) disas
+Dump of assembler code for function phase_4:
+=> 0x0000000000400fc1 <+0>:	sub    $0x18,%rsp
+   0x0000000000400fc5 <+4>:	lea    0xc(%rsp),%rdx
+   0x0000000000400fca <+9>:	mov    $0x401ec1,%esi
+   0x0000000000400fcf <+14>:	mov    $0x0,%eax
+   0x0000000000400fd4 <+19>:	callq  0x400ab0 <__isoc99_sscanf@plt>
+   0x0000000000400fd9 <+24>:	cmp    $0x1,%eax
+   0x0000000000400fdc <+27>:	jne    0x400fe5 <phase_4+36>
+   0x0000000000400fde <+29>:	cmpl   $0x0,0xc(%rsp)
+   0x0000000000400fe3 <+34>:	jg     0x400fea <phase_4+41>
+   0x0000000000400fe5 <+36>:	callq  0x40163d <explode_bomb>
+   0x0000000000400fea <+41>:	mov    0xc(%rsp),%edi
+   0x0000000000400fee <+45>:	callq  0x400f84 <func4>
+   0x0000000000400ff3 <+50>:	cmp    $0x37,%eax
+   0x0000000000400ff6 <+53>:	je     0x400ffd <phase_4+60>
+   0x0000000000400ff8 <+55>:	callq  0x40163d <explode_bomb>
+   0x0000000000400ffd <+60>:	add    $0x18,%rsp
+   0x0000000000401001 <+64>:	retq   
+End of assembler dump.
+(gdb) info r
+rax            0x603030	6303792
+rbx            0x7fffffffe758	140737488349016
+rcx            0x1	1
+rdx            0x4	4
+rsi            0x603030	6303792
+rdi            0x603030	6303792
+rbp            0x0	0x0
+rsp            0x7fffffffe668	0x7fffffffe668
+r8             0x7ffff7ffa041	140737354113089
+r9             0x0	0
+r10            0x2	2
+r11            0x246	582
+r12            0x400c40	4197440
+r13            0x7fffffffe750	140737488349008
+r14            0x0	0
+r15            0x0	0
+rip            0x400fc1	0x400fc1 <phase_4>
+eflags         0x202	[ IF ]
+cs             0x33	51
+ss             0x2b	43
+ds             0x0	0
+es             0x0	0
+fs             0x0	0
+gs             0x0	0
+(gdb) xx /24wx $rsp
+Undefined command: "xx".  Try "help".
+(gdb) x /24wx $rsp
+0x7fffffffe668:	0x00400e0d	0x00000000	0x00000000	0x00000000
+0x7fffffffe678:	0xc7e21735	0x00000030	0x00000000	0x00000000
+0x7fffffffe688:	0xffffe758	0x00007fff	0x00000000	0x00000002
+0x7fffffffe698:	0x00400d24	0x00000000	0x00000000	0x00000000
+0x7fffffffe6a8:	0x57a6d3ef	0x8ab4c327	0x00400c40	0x00000000
+0x7fffffffe6b8:	0xffffe750	0x00007fff	0x00000000	0x00000000
+(gdb) si
+0x0000000000400fc5 in phase_4 ()
+(gdb) 
+0x0000000000400fca in phase_4 ()
+(gdb) 
+0x0000000000400fcf in phase_4 ()
+(gdb) 
+0x0000000000400fd4 in phase_4 ()
+(gdb) disas
+Dump of assembler code for function phase_4:
+   0x0000000000400fc1 <+0>:	sub    $0x18,%rsp
+   0x0000000000400fc5 <+4>:	lea    0xc(%rsp),%rdx
+   0x0000000000400fca <+9>:	mov    $0x401ec1,%esi
+   0x0000000000400fcf <+14>:	mov    $0x0,%eax
+=> 0x0000000000400fd4 <+19>:	callq  0x400ab0 <__isoc99_sscanf@plt>
+   0x0000000000400fd9 <+24>:	cmp    $0x1,%eax
+   0x0000000000400fdc <+27>:	jne    0x400fe5 <phase_4+36>
+   0x0000000000400fde <+29>:	cmpl   $0x0,0xc(%rsp)
+   0x0000000000400fe3 <+34>:	jg     0x400fea <phase_4+41>
+   0x0000000000400fe5 <+36>:	callq  0x40163d <explode_bomb>
+   0x0000000000400fea <+41>:	mov    0xc(%rsp),%edi
+   0x0000000000400fee <+45>:	callq  0x400f84 <func4>
+   0x0000000000400ff3 <+50>:	cmp    $0x37,%eax
+   0x0000000000400ff6 <+53>:	je     0x400ffd <phase_4+60>
+   0x0000000000400ff8 <+55>:	callq  0x40163d <explode_bomb>
+   0x0000000000400ffd <+60>:	add    $0x18,%rsp
+   0x0000000000401001 <+64>:	retq   
+End of assembler dump.
+(gdb) info r
+rax            0x0	0
+rbx            0x7fffffffe758	140737488349016
+rcx            0x1	1
+rdx            0x7fffffffe65c	140737488348764
+rsi            0x401ec1	4202177
+rdi            0x603030	6303792
+rbp            0x0	0x0
+rsp            0x7fffffffe650	0x7fffffffe650
+r8             0x7ffff7ffa041	140737354113089
+r9             0x0	0
+r10            0x2	2
+r11            0x246	582
+r12            0x400c40	4197440
+r13            0x7fffffffe750	140737488349008
+r14            0x0	0
+r15            0x0	0
+rip            0x400fd4	0x400fd4 <phase_4+19>
+eflags         0x206	[ PF IF ]
+cs             0x33	51
+ss             0x2b	43
+ds             0x0	0
+es             0x0	0
+fs             0x0	0
+gs             0x0	0
+(gdb) x /24wx $rsp
+0x7fffffffe650:	0xffffe758	0x00007fff	0x0040166d	0x00000000
+0x7fffffffe660:	0x00400c40	0x00000000	0x00400e0d	0x00000000
+0x7fffffffe670:	0x00000000	0x00000000	0xc7e21735	0x00000030
+0x7fffffffe680:	0x00000000	0x00000000	0xffffe758	0x00007fff
+0x7fffffffe690:	0x00000000	0x00000002	0x00400d24	0x00000000
+0x7fffffffe6a0:	0x00000000	0x00000000	0x57a6d3ef	0x8ab4c327
+(gdb) x /24ws $rsp
+0x7fffffffe650:	 U"\xffffe758翿\x40166d"
+0x7fffffffe660:	 U"\x400c40"
+0x7fffffffe668:	 U"\x400e0d"
+0x7fffffffe670:	 U""
+0x7fffffffe674:	 U""
+0x7fffffffe678:	 U"\xc7e21735\060"
+0x7fffffffe684:	 U""
+0x7fffffffe688:	 U"\xffffe758翿"
+0x7fffffffe694:	 U"\002\x400d24"
+0x7fffffffe6a0:	 U""
+0x7fffffffe6a4:	 U""
+0x7fffffffe6a8:	 U"\x57a6d3ef\x8ab4c327\x400c40"
+0x7fffffffe6b8:	 U"\xffffe750翿"
+0x7fffffffe6c4:	 U""
+0x7fffffffe6c8:	 U""
+0x7fffffffe6cc:	 U""
+0x7fffffffe6d0:	 U"\x9aa6d3ef\x754b3cd8\x7a7cd3ef\x8ad54ce3"
+0x7fffffffe6e4:	 U""
+0x7fffffffe6e8:	 U""
+0x7fffffffe6ec:	 U""
+0x7fffffffe6f0:	 U""
+0x7fffffffe6f4:	 U""
+0x7fffffffe6f8:	 U"\x401800"
+0x7fffffffe700:	 U"\xffffe758翿\002"
+(gdb) ni
+0x0000000000400fd9 in phase_4 ()
+(gdb) 
+0x0000000000400fdc in phase_4 ()
+(gdb) 
+0x0000000000400fde in phase_4 ()
+(gdb) disas
+Dump of assembler code for function phase_4:
+   0x0000000000400fc1 <+0>:	sub    $0x18,%rsp
+   0x0000000000400fc5 <+4>:	lea    0xc(%rsp),%rdx
+   0x0000000000400fca <+9>:	mov    $0x401ec1,%esi
+   0x0000000000400fcf <+14>:	mov    $0x0,%eax
+   0x0000000000400fd4 <+19>:	callq  0x400ab0 <__isoc99_sscanf@plt>
+   0x0000000000400fd9 <+24>:	cmp    $0x1,%eax
+   0x0000000000400fdc <+27>:	jne    0x400fe5 <phase_4+36>
+=> 0x0000000000400fde <+29>:	cmpl   $0x0,0xc(%rsp)
+   0x0000000000400fe3 <+34>:	jg     0x400fea <phase_4+41>
+   0x0000000000400fe5 <+36>:	callq  0x40163d <explode_bomb>
+   0x0000000000400fea <+41>:	mov    0xc(%rsp),%edi
+   0x0000000000400fee <+45>:	callq  0x400f84 <func4>
+   0x0000000000400ff3 <+50>:	cmp    $0x37,%eax
+   0x0000000000400ff6 <+53>:	je     0x400ffd <phase_4+60>
+   0x0000000000400ff8 <+55>:	callq  0x40163d <explode_bomb>
+   0x0000000000400ffd <+60>:	add    $0x18,%rsp
+   0x0000000000401001 <+64>:	retq   
+End of assembler dump.
+(gdb) info r
+rax            0x1	1
+rbx            0x7fffffffe758	140737488349016
+rcx            0x18	24
+rdx            0x30c81b0f98	209515646872
+rsi            0x0	0
+rdi            0xd9f	3487
+rbp            0x0	0x0
+rsp            0x7fffffffe650	0x7fffffffe650
+r8             0x1	1
+r9             0x0	0
+r10            0x1	1
+r11            0x0	0
+r12            0x400c40	4197440
+r13            0x7fffffffe750	140737488349008
+r14            0x0	0
+r15            0x0	0
+rip            0x400fde	0x400fde <phase_4+29>
+eflags         0x246	[ PF ZF IF ]
+cs             0x33	51
+ss             0x2b	43
+ds             0x0	0
+es             0x0	0
+fs             0x0	0
+gs             0x0	0
+(gdb) x /24wx $rsp
+0x7fffffffe650:	0xffffe758	0x00007fff	0x0040166d	0x00000001
+0x7fffffffe660:	0x00400c40	0x00000000	0x00400e0d	0x00000000
+0x7fffffffe670:	0x00000000	0x00000000	0xc7e21735	0x00000030
+0x7fffffffe680:	0x00000000	0x00000000	0xffffe758	0x00007fff
+0x7fffffffe690:	0x00000000	0x00000002	0x00400d24	0x00000000
+0x7fffffffe6a0:	0x00000000	0x00000000	0x57a6d3ef	0x8ab4c327
+(gdb) si
+0x0000000000400fe3 in phase_4 ()
+(gdb) 
+0x0000000000400fea in phase_4 ()
+(gdb) disas
+Dump of assembler code for function phase_4:
+   0x0000000000400fc1 <+0>:	sub    $0x18,%rsp
+   0x0000000000400fc5 <+4>:	lea    0xc(%rsp),%rdx
+   0x0000000000400fca <+9>:	mov    $0x401ec1,%esi
+   0x0000000000400fcf <+14>:	mov    $0x0,%eax
+   0x0000000000400fd4 <+19>:	callq  0x400ab0 <__isoc99_sscanf@plt>
+   0x0000000000400fd9 <+24>:	cmp    $0x1,%eax
+   0x0000000000400fdc <+27>:	jne    0x400fe5 <phase_4+36>
+   0x0000000000400fde <+29>:	cmpl   $0x0,0xc(%rsp)
+   0x0000000000400fe3 <+34>:	jg     0x400fea <phase_4+41>
+   0x0000000000400fe5 <+36>:	callq  0x40163d <explode_bomb>
+=> 0x0000000000400fea <+41>:	mov    0xc(%rsp),%edi
+   0x0000000000400fee <+45>:	callq  0x400f84 <func4>
+   0x0000000000400ff3 <+50>:	cmp    $0x37,%eax
+   0x0000000000400ff6 <+53>:	je     0x400ffd <phase_4+60>
+   0x0000000000400ff8 <+55>:	callq  0x40163d <explode_bomb>
+   0x0000000000400ffd <+60>:	add    $0x18,%rsp
+   0x0000000000401001 <+64>:	retq   
+End of assembler dump.
+(gdb) info r
+rax            0x1	1
+rbx            0x7fffffffe758	140737488349016
+rcx            0x18	24
+rdx            0x30c81b0f98	209515646872
+rsi            0x0	0
+rdi            0xd9f	3487
+rbp            0x0	0x0
+rsp            0x7fffffffe650	0x7fffffffe650
+r8             0x1	1
+r9             0x0	0
+r10            0x1	1
+r11            0x0	0
+r12            0x400c40	4197440
+r13            0x7fffffffe750	140737488349008
+r14            0x0	0
+r15            0x0	0
+rip            0x400fea	0x400fea <phase_4+41>
+eflags         0x202	[ IF ]
+cs             0x33	51
+ss             0x2b	43
+ds             0x0	0
+es             0x0	0
+fs             0x0	0
+gs             0x0	0
+(gdb) x /24wx $rsp
+0x7fffffffe650:	0xffffe758	0x00007fff	0x0040166d	0x00000001
+0x7fffffffe660:	0x00400c40	0x00000000	0x00400e0d	0x00000000
+0x7fffffffe670:	0x00000000	0x00000000	0xc7e21735	0x00000030
+0x7fffffffe680:	0x00000000	0x00000000	0xffffe758	0x00007fff
+0x7fffffffe690:	0x00000000	0x00000002	0x00400d24	0x00000000
+0x7fffffffe6a0:	0x00000000	0x00000000	0x57a6d3ef	0x8ab4c327
+(gdb) si
+0x0000000000400fee in phase_4 ()
+(gdb) 
+0x0000000000400f84 in func4 ()
+(gdb) disas
+Dump of assembler code for function func4:
+=> 0x0000000000400f84 <+0>:	mov    %rbx,-0x10(%rsp)
+   0x0000000000400f89 <+5>:	mov    %rbp,-0x8(%rsp)
+   0x0000000000400f8e <+10>:	sub    $0x18,%rsp
+   0x0000000000400f92 <+14>:	mov    %edi,%ebx
+   0x0000000000400f94 <+16>:	mov    $0x1,%eax
+   0x0000000000400f99 <+21>:	cmp    $0x1,%edi
+   0x0000000000400f9c <+24>:	jle    0x400fb2 <func4+46>
+   0x0000000000400f9e <+26>:	lea    -0x1(%rbx),%edi
+   0x0000000000400fa1 <+29>:	callq  0x400f84 <func4>
+   0x0000000000400fa6 <+34>:	mov    %eax,%ebp
+   0x0000000000400fa8 <+36>:	lea    -0x2(%rbx),%edi
+   0x0000000000400fab <+39>:	callq  0x400f84 <func4>
+   0x0000000000400fb0 <+44>:	add    %ebp,%eax
+   0x0000000000400fb2 <+46>:	mov    0x8(%rsp),%rbx
+   0x0000000000400fb7 <+51>:	mov    0x10(%rsp),%rbp
+   0x0000000000400fbc <+56>:	add    $0x18,%rsp
+   0x0000000000400fc0 <+60>:	retq   
+End of assembler dump.
+(gdb) info r
+rax            0x1	1
+rbx            0x7fffffffe758	140737488349016
+rcx            0x18	24
+rdx            0x30c81b0f98	209515646872
+rsi            0x0	0
+rdi            0x1	1
+rbp            0x0	0x0
+rsp            0x7fffffffe648	0x7fffffffe648
+r8             0x1	1
+r9             0x0	0
+r10            0x1	1
+r11            0x0	0
+r12            0x400c40	4197440
+r13            0x7fffffffe750	140737488349008
+r14            0x0	0
+r15            0x0	0
+rip            0x400f84	0x400f84 <func4>
+eflags         0x202	[ IF ]
+cs             0x33	51
+ss             0x2b	43
+ds             0x0	0
+es             0x0	0
+fs             0x0	0
+gs             0x0	0
+(gdb) x /24wx $rsp
+0x7fffffffe648:	0x00400ff3	0x00000000	0xffffe758	0x00007fff
+0x7fffffffe658:	0x0040166d	0x00000001	0x00400c40	0x00000000
+0x7fffffffe668:	0x00400e0d	0x00000000	0x00000000	0x00000000
+0x7fffffffe678:	0xc7e21735	0x00000030	0x00000000	0x00000000
+0x7fffffffe688:	0xffffe758	0x00007fff	0x00000000	0x00000002
+0x7fffffffe698:	0x00400d24	0x00000000	0x00000000	0x00000000
+(gdb) x /s $rbx
+0x7fffffffe758:	 "[\352\377\377\377\177"
+(gdb) x /d $rbx
+0x7fffffffe758:	91
+(gdb) si
+0x0000000000400f89 in func4 ()
+(gdb) 
+0x0000000000400f8e in func4 ()
+(gdb) 
+0x0000000000400f92 in func4 ()
+(gdb) disas
+Dump of assembler code for function func4:
+   0x0000000000400f84 <+0>:	mov    %rbx,-0x10(%rsp)
+   0x0000000000400f89 <+5>:	mov    %rbp,-0x8(%rsp)
+   0x0000000000400f8e <+10>:	sub    $0x18,%rsp
+=> 0x0000000000400f92 <+14>:	mov    %edi,%ebx
+   0x0000000000400f94 <+16>:	mov    $0x1,%eax
+   0x0000000000400f99 <+21>:	cmp    $0x1,%edi
+   0x0000000000400f9c <+24>:	jle    0x400fb2 <func4+46>
+   0x0000000000400f9e <+26>:	lea    -0x1(%rbx),%edi
+   0x0000000000400fa1 <+29>:	callq  0x400f84 <func4>
+   0x0000000000400fa6 <+34>:	mov    %eax,%ebp
+   0x0000000000400fa8 <+36>:	lea    -0x2(%rbx),%edi
+   0x0000000000400fab <+39>:	callq  0x400f84 <func4>
+   0x0000000000400fb0 <+44>:	add    %ebp,%eax
+   0x0000000000400fb2 <+46>:	mov    0x8(%rsp),%rbx
+   0x0000000000400fb7 <+51>:	mov    0x10(%rsp),%rbp
+   0x0000000000400fbc <+56>:	add    $0x18,%rsp
+   0x0000000000400fc0 <+60>:	retq   
+End of assembler dump.
+(gdb) info r
+rax            0x1	1
+rbx            0x7fffffffe758	140737488349016
+rcx            0x18	24
+rdx            0x30c81b0f98	209515646872
+rsi            0x0	0
+rdi            0x1	1
+rbp            0x0	0x0
+rsp            0x7fffffffe630	0x7fffffffe630
+r8             0x1	1
+r9             0x0	0
+r10            0x1	1
+r11            0x0	0
+r12            0x400c40	4197440
+r13            0x7fffffffe750	140737488349008
+r14            0x0	0
+r15            0x0	0
+rip            0x400f92	0x400f92 <func4+14>
+eflags         0x206	[ PF IF ]
+cs             0x33	51
+ss             0x2b	43
+ds             0x0	0
+es             0x0	0
+fs             0x0	0
+gs             0x0	0
+(gdb) x /32wx $rsp
+0x7fffffffe630:	0xffffe758	0x00007fff	0xffffe758	0x00007fff
+0x7fffffffe640:	0x00000000	0x00000000	0x00400ff3	0x00000000
+0x7fffffffe650:	0xffffe758	0x00007fff	0x0040166d	0x00000001
+0x7fffffffe660:	0x00400c40	0x00000000	0x00400e0d	0x00000000
+0x7fffffffe670:	0x00000000	0x00000000	0xc7e21735	0x00000030
+0x7fffffffe680:	0x00000000	0x00000000	0xffffe758	0x00007fff
+0x7fffffffe690:	0x00000000	0x00000002	0x00400d24	0x00000000
+0x7fffffffe6a0:	0x00000000	0x00000000	0x57a6d3ef	0x8ab4c327
+(gdb) x /d $rbx
+0x7fffffffe758:	-5541
+(gdb) x /d $rbx-1
+0x7fffffffe757:	-1418496
+(gdb) si
+0x0000000000400f94 in func4 ()
+(gdb) 
+0x0000000000400f99 in func4 ()
+(gdb) 
+0x0000000000400f9c in func4 ()
+(gdb) disas
+Dump of assembler code for function func4:
+   0x0000000000400f84 <+0>:	mov    %rbx,-0x10(%rsp)
+   0x0000000000400f89 <+5>:	mov    %rbp,-0x8(%rsp)
+   0x0000000000400f8e <+10>:	sub    $0x18,%rsp
+   0x0000000000400f92 <+14>:	mov    %edi,%ebx
+   0x0000000000400f94 <+16>:	mov    $0x1,%eax
+   0x0000000000400f99 <+21>:	cmp    $0x1,%edi
+=> 0x0000000000400f9c <+24>:	jle    0x400fb2 <func4+46>
+   0x0000000000400f9e <+26>:	lea    -0x1(%rbx),%edi
+   0x0000000000400fa1 <+29>:	callq  0x400f84 <func4>
+   0x0000000000400fa6 <+34>:	mov    %eax,%ebp
+   0x0000000000400fa8 <+36>:	lea    -0x2(%rbx),%edi
+   0x0000000000400fab <+39>:	callq  0x400f84 <func4>
+   0x0000000000400fb0 <+44>:	add    %ebp,%eax
+   0x0000000000400fb2 <+46>:	mov    0x8(%rsp),%rbx
+   0x0000000000400fb7 <+51>:	mov    0x10(%rsp),%rbp
+   0x0000000000400fbc <+56>:	add    $0x18,%rsp
+   0x0000000000400fc0 <+60>:	retq   
+End of assembler dump.
+(gdb) info r
+rax            0x1	1
+rbx            0x1	1
+rcx            0x18	24
+rdx            0x30c81b0f98	209515646872
+rsi            0x0	0
+rdi            0x1	1
+rbp            0x0	0x0
+rsp            0x7fffffffe630	0x7fffffffe630
+r8             0x1	1
+r9             0x0	0
+r10            0x1	1
+r11            0x0	0
+r12            0x400c40	4197440
+r13            0x7fffffffe750	140737488349008
+r14            0x0	0
+r15            0x0	0
+rip            0x400f9c	0x400f9c <func4+24>
+eflags         0x246	[ PF ZF IF ]
+cs             0x33	51
+ss             0x2b	43
+ds             0x0	0
+es             0x0	0
+fs             0x0	0
+gs             0x0	0
+(gdb) x /32wx $rsp
+0x7fffffffe630:	0xffffe758	0x00007fff	0xffffe758	0x00007fff
+0x7fffffffe640:	0x00000000	0x00000000	0x00400ff3	0x00000000
+0x7fffffffe650:	0xffffe758	0x00007fff	0x0040166d	0x00000001
+0x7fffffffe660:	0x00400c40	0x00000000	0x00400e0d	0x00000000
+0x7fffffffe670:	0x00000000	0x00000000	0xc7e21735	0x00000030
+0x7fffffffe680:	0x00000000	0x00000000	0xffffe758	0x00007fff
+0x7fffffffe690:	0x00000000	0x00000002	0x00400d24	0x00000000
+0x7fffffffe6a0:	0x00000000	0x00000000	0x57a6d3ef	0x8ab4c327
+(gdb) k
+

@@ -1,0 +1,3 @@
+r -u 3279655 < smoke.bytes
+r -u 3279655 < fizz.bytes
+r -u 3279655 < bang.bytes

